@@ -11,7 +11,7 @@ public class Isotopologue {
     final double abundance;
     final double mass;
 
-    public Isotopologue(double abundance, Map<IIsotope, Integer> isotopes, double intensity, double mass) {
+    public Isotopologue(Map<IIsotope, Integer> isotopes, double abundance, double intensity, double mass) {
         this.isotopes = isotopes;
         this.abundance = abundance;
         this.intensity = intensity;

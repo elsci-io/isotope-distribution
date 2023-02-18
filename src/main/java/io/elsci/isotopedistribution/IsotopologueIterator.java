@@ -28,11 +28,15 @@ class IsotopologueIterator implements Iterator<Isotopologue> {
         if (maxAbundance == -1)
             maxAbundance = word.probability;
 
+        double generalMass = 0;
         Map<Symbol, Integer> frequencies = word.symbols.getSymbolFrequencies();
         Map<IIsotope, Integer> isotopesMap = new HashMap<>();
-        for (Map.Entry<Symbol, Integer> entry : frequencies.entrySet())
-            isotopesMap.put(IsotopeAlphabets.getIsotope(entry.getKey()), entry.getValue());
+        for (Map.Entry<Symbol, Integer> entry : frequencies.entrySet()) {
+            IIsotope isotope = IsotopeAlphabets.getIsotope(entry.getKey());
+            isotopesMap.put(isotope, entry.getValue());
+            generalMass += isotope.getExactMass();
+        }
 
-        return new Isotopologue(word.probability, isotopesMap, word.probability / maxAbundance, 0);
+        return new Isotopologue(isotopesMap, word.probability, word.probability / maxAbundance, generalMass);
     }
 }
