@@ -2,7 +2,6 @@ package io.elsci.isotopedistribution;
 
 import io.elsci.multinomial.Symbol;
 import io.elsci.multinomial.Word;
-import org.openscience.cdk.Isotope;
 import org.openscience.cdk.interfaces.IIsotope;
 
 import java.util.HashMap;
@@ -12,9 +11,11 @@ import java.util.Map;
 class IsotopologueIterator implements Iterator<Isotopologue> {
     private final Iterator<Word> iterator;
     private double maxAbundance = -1;
+    private final double minAbundance;
 
-    public IsotopologueIterator(Iterator<Word> iterator) {
+    public IsotopologueIterator(Iterator<Word> iterator, double minAbundance) {
         this.iterator = iterator;
+        this.minAbundance = minAbundance;
     }
 
     @Override
@@ -33,8 +34,10 @@ class IsotopologueIterator implements Iterator<Isotopologue> {
         Map<IIsotope, Integer> isotopesMap = new HashMap<>();
         for (Map.Entry<Symbol, Integer> entry : frequencies.entrySet()) {
             IIsotope isotope = IsotopeAlphabets.getIsotope(entry.getKey());
-            isotopesMap.put(isotope, entry.getValue());
-            generalMass += isotope.getExactMass();
+            if (isotope.getNaturalAbundance() >= minAbundance) {
+                isotopesMap.put(isotope, entry.getValue());
+                generalMass += isotope.getExactMass()*entry.getValue();
+            }
         }
 
         return new Isotopologue(isotopesMap, word.probability, word.probability / maxAbundance, generalMass);

@@ -13,7 +13,7 @@ import java.util.Iterator;
 
 public class IsotopologueIteratorFactory {
 
-    public static Iterator<Isotopologue> createIsotopologueIterator(String formula) {
+    public static Iterator<Isotopologue> createIsotopologueIterator(String formula, double minAbundance) {
         IMolecularFormula molecularFormula = MolecularFormulaManipulator.getMajorIsotopeMolecularFormula(formula, DefaultChemObjectBuilder.getInstance());
         HashMap<Alphabet, Integer> hashMap = new HashMap<>();
         for (IIsotope isos : molecularFormula.isotopes()) {
@@ -21,6 +21,6 @@ public class IsotopologueIteratorFactory {
             Alphabet alphabet = IsotopeAlphabets.getAlphabet(elementSymbol);
             hashMap.put(alphabet, molecularFormula.getIsotopeCount(isos));
         }
-        return new IsotopologueIterator(WordIteratorFactory.create(new WordSpec(hashMap)));
+        return new IsotopologueIterator(WordIteratorFactory.create(new WordSpec(hashMap)), minAbundance);
     }
 }

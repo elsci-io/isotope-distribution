@@ -12,24 +12,14 @@ import java.util.*;
 
 class IsotopeAlphabets {
     private static final Map<Symbol, IIsotope> SYMBOL_TO_ISOTOPE = new HashMap<>();
-    private static final Map<IIsotope, Symbol> ISOTOPE_TO_SYMBOL = new HashMap<>();
     private static final Map<String, Alphabet> ALPHABETS = new HashMap<>();
-
-    public static Symbol getSymbol(IIsotope isotope) {
-        if (ISOTOPE_TO_SYMBOL.isEmpty())
-            fillMaps();
-        return ISOTOPE_TO_SYMBOL.get(isotope);
-    }
+    static { fillMaps(); }
 
     public static IIsotope getIsotope(Symbol s) {
-        if (SYMBOL_TO_ISOTOPE.isEmpty())
-            fillMaps();
         return SYMBOL_TO_ISOTOPE.get(s);
     }
 
     public static Alphabet getAlphabet(String elementSymbol) {
-        if (ALPHABETS.isEmpty())
-            fillMaps();
         return ALPHABETS.get(elementSymbol);
     }
 
@@ -43,13 +33,15 @@ class IsotopeAlphabets {
 
         for (Elements element : Elements.values()) {
             IIsotope[] isotopes = isoFactory.getIsotopes(element.symbol());
-            Arrays.sort(isotopes, Comparator.comparing(IIsotope::getNaturalAbundance));
+            Arrays.sort(isotopes, Comparator.comparing(IIsotope::getNaturalAbundance, Comparator.reverseOrder()));
+            if (isotopes.length == 0 || isotopes[0].getNaturalAbundance() == 0) {
+                continue;
+            }
             Alphabet alphabet = createAlphabet(element.symbol(), isotopes);
             ALPHABETS.put(element.symbol(), alphabet);
-            for (int i = 0; i < isotopes.length; i++) { //можно ли создавать алфавит прямо здесь? то есть перенести сюда внутренности функции createAlphabet
+            for (int i = 0; i < isotopes.length; i++) {
                 Symbol symbol = alphabet.getSymbol(i);
                 SYMBOL_TO_ISOTOPE.put(symbol, isotopes[i]);
-                ISOTOPE_TO_SYMBOL.put(isotopes[i], symbol);
             }
         }
 
