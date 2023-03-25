@@ -11,11 +11,9 @@ import java.util.Map;
 class IsotopologueIterator implements Iterator<Isotopologue> {
     private final Iterator<Word> iterator;
     private double maxAbundance = -1;
-    private final double minAbundance;
 
-    public IsotopologueIterator(Iterator<Word> iterator, double minAbundance) {
+    public IsotopologueIterator(Iterator<Word> iterator) {
         this.iterator = iterator;
-        this.minAbundance = minAbundance;
     }
 
     @Override
@@ -34,7 +32,7 @@ class IsotopologueIterator implements Iterator<Isotopologue> {
         Map<IIsotope, Integer> isotopesMap = new HashMap<>();
         for (Map.Entry<Symbol, Integer> entry : frequencies.entrySet()) {
             IIsotope isotope = IsotopeAlphabets.getIsotope(entry.getKey());
-            if (isotope.getNaturalAbundance() >= minAbundance) {
+            if (isotope.getNaturalAbundance()/100 >= 0) {
                 isotopesMap.put(isotope, entry.getValue());
                 generalMass += isotope.getExactMass()*entry.getValue();
             }

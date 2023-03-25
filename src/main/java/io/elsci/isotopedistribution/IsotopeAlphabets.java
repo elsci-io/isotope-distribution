@@ -10,7 +10,8 @@ import org.openscience.cdk.interfaces.IIsotope;
 import java.io.IOException;
 import java.util.*;
 
-class IsotopeAlphabets {
+class
+IsotopeAlphabets {
     private static final Map<Symbol, IIsotope> SYMBOL_TO_ISOTOPE = new HashMap<>();
     private static final Map<String, Alphabet> ALPHABETS = new HashMap<>();
     static { fillMaps(); }
