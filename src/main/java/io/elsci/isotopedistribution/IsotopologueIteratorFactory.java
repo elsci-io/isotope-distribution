@@ -12,8 +12,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class IsotopologueIteratorFactory {
-
+    /**
+     * @param minIntensity must be between 0 and 1
+     *                     add more details about sorting (google how to write javadocs)
+     */
     public static Iterator<Isotopologue> createIsotopologueIterator(String formula, double minIntensity) {
+        return new IntensityThresholdIsotopologueIterator(createIsotopologueIterator(formula), minIntensity);
+    }
+
+    public static Iterator<Isotopologue> createIsotopologueIterator(String formula) {
         IMolecularFormula molecularFormula = MolecularFormulaManipulator.getMajorIsotopeMolecularFormula(formula, DefaultChemObjectBuilder.getInstance());
         HashMap<Alphabet, Integer> hashMap = new HashMap<>();
         for (IIsotope isos : molecularFormula.isotopes()) {
@@ -21,11 +28,6 @@ public class IsotopologueIteratorFactory {
             Alphabet alphabet = IsotopeAlphabets.getAlphabet(elementSymbol);
             hashMap.put(alphabet, molecularFormula.getIsotopeCount(isos));
         }
-        IsotopologueIterator it = new IsotopologueIterator(WordIteratorFactory.create(new WordSpec(hashMap)));
-        return new IntensityThresholdIsotopologueIterator(it, minIntensity);
-    }
-
-    public static Iterator<Isotopologue> createIsotopologueIterator(String formula) {
-        return createIsotopologueIterator(formula, 0);
+        return new IsotopologueIterator(WordIteratorFactory.create(new WordSpec(hashMap)));
     }
 }

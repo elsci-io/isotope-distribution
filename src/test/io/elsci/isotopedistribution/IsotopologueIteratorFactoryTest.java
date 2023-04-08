@@ -8,9 +8,9 @@ import java.util.Map;
 import static org.junit.Assert.*;
 
 public class IsotopologueIteratorFactoryTest {
-
+// назови классы в четь итераторов (2 шт)
     @Test
-    public void isotopologueIteratorReturnsIsotopologuesOfHydrogen2() {
+    public void canInvokeNextWithoutHasNext_WithOneAtom() {
         Iterator<Isotopologue> it = IsotopologueIteratorFactory.createIsotopologueIterator("H");
         Isotopologue[] expectedArray = new Isotopologue[] {
                 IsotopologueFactory.createIsotopologue(new String[]{"H"}, new int[]{1}, 1),
@@ -23,7 +23,7 @@ public class IsotopologueIteratorFactoryTest {
     }
 
     @Test
-    public void isotopologueIteratorReturnsIsotopologuesOfH2() {
+    public void canInvokeNextWithoutHasNext_WithSimpleMolecule() {
         Iterator<Isotopologue> it = IsotopologueIteratorFactory.createIsotopologueIterator("H2");
         Isotopologue[] expectedArray = new Isotopologue[] {
                 IsotopologueFactory.createIsotopologue(new String[]{"H", "H"}, new int[]{1, 1}, 1),
@@ -39,7 +39,7 @@ public class IsotopologueIteratorFactoryTest {
     }
 
     @Test
-    public void isotopologueIteratorReturnsIsotopologuesOfH2O() {
+    public void canInvokeNextWithoutHasNext_WithMolecule() {
         Iterator<Isotopologue> it = IsotopologueIteratorFactory.createIsotopologueIterator("H2O");
         Isotopologue[] expectedArray = new Isotopologue[] {
                 IsotopologueFactory.createIsotopologue(new String[]{"H", "H", "O"}, new int[]{1, 1, 16}, 1),

@@ -30,6 +30,11 @@ class IntensityThresholdIsotopologueIterator implements Iterator<Isotopologue> {
         }
         return true;
     }
+
+    /**
+     * @return all Isotopologues of a given molecule sorted from the most common to the rarest,
+     * the output can be limited with the minAllowedIntensity
+     */
     @Override
     public Isotopologue next() {
         if(!hasNext())

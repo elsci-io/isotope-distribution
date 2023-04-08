@@ -31,6 +31,10 @@ public class IntensityThresholdIsotopologueIteratorTest {
         }
         assertEquals(9, i);
 
+        assertReachedEnd(it);
+    }
+
+    private static void assertReachedEnd(Iterator<Isotopologue> it) {
         try {
             it.next();
             fail("Not reached the end");
@@ -56,10 +60,7 @@ public class IntensityThresholdIsotopologueIteratorTest {
         }
         assertEquals(7, i);
 
-        try {
-            it.next();
-            fail("Not reached the end");
-        } catch (NoSuchElementException e){}
+        assertReachedEnd(it);
 
     }
 }
