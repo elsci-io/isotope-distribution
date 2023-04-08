@@ -24,4 +24,8 @@ public class IsotopologueIteratorFactory {
         IsotopologueIterator it = new IsotopologueIterator(WordIteratorFactory.create(new WordSpec(hashMap)));
         return new IntensityThresholdIsotopologueIterator(it, minIntensity);
     }
+
+    public static Iterator<Isotopologue> createIsotopologueIterator(String formula) {
+        return createIsotopologueIterator(formula, 0);
+    }
 }
