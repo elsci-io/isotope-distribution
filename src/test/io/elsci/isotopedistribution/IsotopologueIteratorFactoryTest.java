@@ -57,13 +57,6 @@ public class IsotopologueIteratorFactoryTest {
         }
         assertFalse(it.hasNext());
     }
-    @Test
-    public void isotopologueIteratorReturnsIsotopologues() {
-        Iterator<Isotopologue> it = IsotopologueIteratorFactory.createIsotopologueIterator("H2O");
-        while (it.hasNext()) {
-            System.out.println(it.next());
-        }
-    }
 
     public static void assertIsotopologueEqual(Isotopologue expected, Isotopologue actual) {
         assertEquals(expected.abundance, actual.abundance, 1E-6);
