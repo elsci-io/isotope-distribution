@@ -3,6 +3,9 @@ package io.elsci.isotopedistribution;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * It is designed to be a wrapper for {@link IsotopologueIterator} to be able to limit the output with {@link #minAllowedIntensity}.
+ */
 class IntensityThresholdIsotopologueIterator implements Iterator<Isotopologue> {
     private final Iterator<Isotopologue> iterator;
     private final double minAllowedIntensity;
@@ -32,7 +35,7 @@ class IntensityThresholdIsotopologueIterator implements Iterator<Isotopologue> {
     }
 
     /**
-     * @return all Isotopologues of a given molecule sorted from the most common to the rarest,
+     * @return Isotopologues of a given molecule sorted from the most common to the rarest,
      * the output can be limited with the minAllowedIntensity
      */
     @Override

@@ -6,8 +6,18 @@ import java.util.Map;
 
 
 public class Isotopologue {
-    public final Map<IIsotope, Integer/*number of isotopes*/> isotopes;
+    /**
+     * Shows how many occurrences of each isotope an isotopologue has.
+     */
+    public final Map<IIsotope, Integer> isotopes;
+    /**
+     * Value can be between 0 and 1:
+     * {@code intensity = abundance of current Isotopologue / abundance of primary isotopologue}.
+     */
     public final double intensity;
+    /**
+     * Abundance is how common the isotopologue is on the Earth relative to other isotopes (between 0 and 1).
+     */
     public final double abundance;
     public final double mass;
 

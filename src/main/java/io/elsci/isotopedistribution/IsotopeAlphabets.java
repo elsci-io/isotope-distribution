@@ -16,10 +16,16 @@ IsotopeAlphabets {
     private static final Map<String, Alphabet> ALPHABETS = new HashMap<>();
     static { fillMaps(); }
 
+    /**
+     * @return the Isotope of the given Symbol (these are different classes representing the same essence in this case).
+     */
     public static IIsotope getIsotope(Symbol s) {
         return SYMBOL_TO_ISOTOPE.get(s);
-    }
+    } //может лучше projected сделать?
 
+    /**
+     * @param elementSymbol is the name of the element whose probabilities of isotopes (in Alphabet) you want to get.
+     */
     public static Alphabet getAlphabet(String elementSymbol) {
         return ALPHABETS.get(elementSymbol);
     }

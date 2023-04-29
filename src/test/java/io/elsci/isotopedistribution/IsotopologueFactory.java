@@ -1,5 +1,6 @@
 package io.elsci.isotopedistribution;
 
+import io.elsci.isotopedistribution.Isotopologue;
 import org.openscience.cdk.Isotope;
 import org.openscience.cdk.config.Isotopes;
 import org.openscience.cdk.interfaces.IIsotope;

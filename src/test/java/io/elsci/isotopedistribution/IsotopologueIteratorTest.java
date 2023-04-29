@@ -1,5 +1,7 @@
 package io.elsci.isotopedistribution;
 
+import io.elsci.isotopedistribution.Isotopologue;
+import io.elsci.isotopedistribution.IsotopologueIteratorFactory;
 import org.junit.Test;
 import org.openscience.cdk.interfaces.IIsotope;
 import java.util.Iterator;
@@ -7,12 +9,11 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class IsotopologueIteratorFactoryTest {
-// назови классы в четь итераторов (2 шт)
+public class IsotopologueIteratorTest {
     @Test
     public void canInvokeNextWithoutHasNext_WithOneAtom() {
         Iterator<Isotopologue> it = IsotopologueIteratorFactory.createIsotopologueIterator("H");
-        Isotopologue[] expectedArray = new Isotopologue[] {
+        Isotopologue[] expectedArray = new Isotopologue[]{
                 IsotopologueFactory.createIsotopologue(new String[]{"H"}, new int[]{1}, 1),
                 IsotopologueFactory.createIsotopologue(new String[]{"H"}, new int[]{2}, 1)
         };
@@ -23,15 +24,15 @@ public class IsotopologueIteratorFactoryTest {
     }
 
     @Test
-    public void canInvokeNextWithoutHasNext_WithSimpleMolecule() {
+    public void canInvokeNextWithHasNext_WithSimpleMolecule() {
         Iterator<Isotopologue> it = IsotopologueIteratorFactory.createIsotopologueIterator("H2");
-        Isotopologue[] expectedArray = new Isotopologue[] {
+        Isotopologue[] expectedArray = new Isotopologue[]{
                 IsotopologueFactory.createIsotopologue(new String[]{"H", "H"}, new int[]{1, 1}, 1),
                 IsotopologueFactory.createIsotopologue(new String[]{"H", "H"}, new int[]{1, 2}, 2),
                 IsotopologueFactory.createIsotopologue(new String[]{"H", "H"}, new int[]{2, 2}, 1)
         };
         int i = 0;
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             assertIsotopologueEqual(expectedArray[i], it.next());
             i++;
         }
@@ -41,7 +42,7 @@ public class IsotopologueIteratorFactoryTest {
     @Test
     public void canInvokeNextWithoutHasNext_WithMolecule() {
         Iterator<Isotopologue> it = IsotopologueIteratorFactory.createIsotopologueIterator("H2O");
-        Isotopologue[] expectedArray = new Isotopologue[] {
+        Isotopologue[] expectedArray = new Isotopologue[]{
                 IsotopologueFactory.createIsotopologue(new String[]{"H", "H", "O"}, new int[]{1, 1, 16}, 1),
                 IsotopologueFactory.createIsotopologue(new String[]{"H", "H", "O"}, new int[]{1, 1, 18}, 1),
                 IsotopologueFactory.createIsotopologue(new String[]{"H", "H", "O"}, new int[]{1, 1, 17}, 1),

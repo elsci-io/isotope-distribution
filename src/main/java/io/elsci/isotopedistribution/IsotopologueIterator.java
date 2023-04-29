@@ -7,7 +7,9 @@ import org.openscience.cdk.interfaces.IIsotope;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
+/**
+ *  Returns all Isotopologues of a given molecule sorted from the most common to the rarest.
+ */
 class IsotopologueIterator implements Iterator<Isotopologue> {
     private final Iterator<Word> iterator;
     private double maxAbundance = -1;
@@ -21,6 +23,9 @@ class IsotopologueIterator implements Iterator<Isotopologue> {
         return iterator.hasNext();
     }
 
+    /**
+     * @return the isotopologue which has the next highest intensity.
+     */
     @Override
     public Isotopologue next() {
         Word word = iterator.next();
