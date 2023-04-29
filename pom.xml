@@ -4,15 +4,50 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.elsci</groupId>
+    <groupId>io.elsci.isotope-distribution</groupId>
     <artifactId>isotope-distribution</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
+    <name>Elsci Isotope Distribution</name>
+    <description>Given a Molecular Formula, lists all possible isotopologues (molecules with different isotopes). Can sort by the abundance.</description>
+    <url>https://github.com/elsci-io/isotope-distribution</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Anna Ponamorova</name>
+            <email>anutapontera@gmail.com</email>
+            <organization>Elsci</organization>
+            <organizationUrl>https://elsci.io</organizationUrl>
+        </developer>
+        <developer>
+            <name>Stanislav Bashkyrtsev</name>
+            <email>stanislav.bashkyrtsev@elsci.io</email>
+            <organization>Elsci</organization>
+            <organizationUrl>https://elsci.io</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>git@github.com:elsci-io/isotope-distribution.git</connection>
+        <developerConnection>git@github.com:elsci-io/isotope-distribution.git</developerConnection>
+        <url>https://github.com/elsci-io/isotope-distribution</url>
+    </scm>
 
     <dependencies>
         <dependency>
-            <groupId>io.elsci</groupId>
-            <artifactId>multinom-selection</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
+            <groupId>io.elsci.multinomial-selection</groupId>
+            <artifactId>multinomial-selection</artifactId>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.openscience.cdk</groupId>
@@ -27,7 +62,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -47,6 +82,69 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.13</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 </project>

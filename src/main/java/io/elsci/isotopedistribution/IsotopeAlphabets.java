@@ -1,7 +1,7 @@
 package io.elsci.isotopedistribution;
 
-import io.elsci.multinomial.Alphabet;
-import io.elsci.multinomial.Symbol;
+import io.elsci.multinomialselection.Alphabet;
+import io.elsci.multinomialselection.Symbol;
 import org.openscience.cdk.config.Elements;
 import org.openscience.cdk.config.IsotopeFactory;
 import org.openscience.cdk.config.Isotopes;
@@ -10,8 +10,7 @@ import org.openscience.cdk.interfaces.IIsotope;
 import java.io.IOException;
 import java.util.*;
 
-class
-IsotopeAlphabets {
+class IsotopeAlphabets {
     private static final Map<Symbol, IIsotope> SYMBOL_TO_ISOTOPE = new HashMap<>();
     private static final Map<String, Alphabet> ALPHABETS = new HashMap<>();
     static { fillMaps(); }
@@ -21,7 +20,7 @@ IsotopeAlphabets {
      */
     public static IIsotope getIsotope(Symbol s) {
         return SYMBOL_TO_ISOTOPE.get(s);
-    } //может лучше projected сделать?
+    }
 
     /**
      * @param elementSymbol is the name of the element whose probabilities of isotopes (in Alphabet) you want to get.
@@ -39,6 +38,7 @@ IsotopeAlphabets {
         }
 
         for (Elements element : Elements.values()) {
+            // TODO: filter out isotopes that have 0 abundance
             IIsotope[] isotopes = isoFactory.getIsotopes(element.symbol());
             Arrays.sort(isotopes, Comparator.comparing(IIsotope::getNaturalAbundance, Comparator.reverseOrder()));
             if (isotopes.length == 0 || isotopes[0].getNaturalAbundance() == 0) {

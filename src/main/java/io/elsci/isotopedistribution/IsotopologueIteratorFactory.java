@@ -1,8 +1,8 @@
 package io.elsci.isotopedistribution;
 
-import io.elsci.multinomial.Alphabet;
-import io.elsci.multinomial.WordIteratorFactory;
-import io.elsci.multinomial.WordSpec;
+import io.elsci.multinomialselection.Alphabet;
+import io.elsci.multinomialselection.WordIteratorFactory;
+import io.elsci.multinomialselection.WordSpec;
 import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.interfaces.IIsotope;
 import org.openscience.cdk.interfaces.IMolecularFormula;
