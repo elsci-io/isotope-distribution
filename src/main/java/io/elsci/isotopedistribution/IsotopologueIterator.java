@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 /**
- *  Returns all Isotopologues of a given molecule sorted from the most common to the rarest.
+ *  Returns all Isotopologues (with intensity greater than 0) of a given molecule sorted from the most common
+ *  to the rarest.
  */
 class IsotopologueIterator implements Iterator<Isotopologue> {
     private final Iterator<Word> iterator;
