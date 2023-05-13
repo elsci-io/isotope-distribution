@@ -38,7 +38,6 @@ class IsotopeAlphabets {
         }
 
         for (Elements element : Elements.values()) {
-            // TODO: filter out isotopes that have 0 abundance
             IIsotope[] isotopes = isoFactory.getIsotopes(element.symbol());
             Arrays.sort(isotopes, Comparator.comparing(IIsotope::getNaturalAbundance, Comparator.reverseOrder()));
             if (isotopes.length == 0 || isotopes[0].getNaturalAbundance() == 0) {
@@ -58,8 +57,10 @@ class IsotopeAlphabets {
         List<Double> probabilities = new ArrayList<>();
         for (IIsotope isotope : isotopes) {
             Double abundance = isotope.getNaturalAbundance();
-            if (!(abundance.isNaN() || abundance.isInfinite() || abundance < 1e-9))
+             //almost every element in the cdk has an isotope with zero abundance
+            if (abundance > 0) {
                 probabilities.add(abundance * 0.01);
+            }
         }
         return new Alphabet(element, toArray(probabilities));
     }
