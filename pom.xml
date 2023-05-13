@@ -6,7 +6,7 @@
 
     <groupId>io.elsci.isotope-distribution</groupId>
     <artifactId>isotope-distribution</artifactId>
-    <version>0.1.0</version>
+    <version>1.0.0</version>
     <name>Elsci Isotope Distribution</name>
     <description>Given a Molecular Formula, lists all possible isotopologues (molecules with different isotopes). Can sort by the abundance.</description>
     <url>https://github.com/elsci-io/isotope-distribution</url>
